@@ -7,8 +7,6 @@ add_executable(lab_1 main.cpp
         main.h
         src/menu.cpp
         headers/menu.h
-        src/entrypoint.cpp
-        headers/entrypoint.h
         src/app.cpp
         headers/app.h
         src/figures.cpp
