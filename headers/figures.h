@@ -2,24 +2,19 @@
 #define FIGURES_H
 
 #include <string>
-#include <utility>
 #include <array>
 #include <stdexcept>
-#define EPS 0.0000001
-
-
-class FigureContainer {
-
-};
+#define EPS 1e-6
 
 class Figure {
 public:
-    const std::string name;
-    explicit Figure(std::string str): name(std::move(str)) {};
+    explicit Figure(std::string str): name(std::move(str)) {}
     virtual double getPerimeter() const = 0;
-    virtual void printFigure() const = 0;
+    virtual void printFigure() const = 0; //  паттерн Visitor  или Properties
     virtual void printFigurePerimeter() const = 0;
     virtual ~Figure() = default;
+protected:
+    const std::string name;
 };
 
 class Circle: public Figure {
