@@ -46,3 +46,15 @@ std::shared_ptr<Figure> TriangleFabric::createFigure() {
         }
     return figure;
 }
+
+std::shared_ptr<CircleFabric> FabricsFactory::createCircleFabric() {
+    return std::make_shared<CircleFabric>();
+}
+
+std::shared_ptr<RectangleFabric> FabricsFactory::createRectangleFabric() {
+    return std::make_shared<RectangleFabric>();
+}
+
+std::shared_ptr<TriangleFabric> FabricsFactory::createTriangleFabric() {
+    return std::make_shared<TriangleFabric>();
+}
