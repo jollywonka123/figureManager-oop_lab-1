@@ -7,8 +7,8 @@ add_executable(lab_1 main.cpp
         main.h
         src/menu.cpp
         headers/menu.h
-        src/app.cpp
-        headers/app.h
+        src/entrypoint.cpp
+        headers/entrypoint.h
         src/figures.cpp
         headers/figures.h
         src/fabric.cpp
@@ -16,4 +16,5 @@ add_executable(lab_1 main.cpp
         src/inputValidator.cpp
         headers/inputValidator.h
         src/figuresManager.cpp
-        headers/figuresManager.h)
+        headers/figuresManager.h
+        headers/constants.h)
