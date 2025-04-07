@@ -28,4 +28,20 @@ public:
     ~TriangleFabric() override = default;
 };
 
+class AbstractFabricsFactory {
+    public:
+    virtual std::shared_ptr<CircleFabric> createCircleFabric() = 0;
+    virtual std::shared_ptr<RectangleFabric> createRectangleFabric() = 0;
+    virtual std::shared_ptr<TriangleFabric> createTriangleFabric() = 0;
+    virtual ~AbstractFabricsFactory() = default;
+};
+
+class FabricsFactory : public AbstractFabricsFactory {
+    public:
+    std::shared_ptr<CircleFabric> createCircleFabric() override;
+    std::shared_ptr<RectangleFabric> createRectangleFabric() override;
+    std::shared_ptr<TriangleFabric> createTriangleFabric() override;
+    ~FabricsFactory() override = default;
+};
+
 #endif //FABRIC_H
