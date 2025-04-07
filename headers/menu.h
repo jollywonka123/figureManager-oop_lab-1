@@ -2,25 +2,16 @@
 #define MENU_H
 
 #include "figuresManager.h"
-
-enum Option {
-    EXIT,
-    ADD_FIGURE,
-    OUTPUT_PARAM,
-    OUTPUT_PERIM,
-    PRINT_PERIM_SUM,
-    SORT_PERIM_ASC,
-    DELETE_BY_NUM,
-    DELETE_LARGER_PERIM,
-};
+#include "optional"
+#include "constants.h"
 
 class Menu {
     public:
-    Menu(): fManager() {};
+    Menu(): fManager(), inpValue(DEFAULT) {};
     void show();
 
-    private:
-    figuresManager fManager;
+private:
+    FiguresManager fManager;
     int inpValue;
     void handleInput();
     void handlePollingInput();
