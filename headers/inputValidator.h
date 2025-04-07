@@ -9,6 +9,7 @@
 class InputValidator {
 public:
     static bool isError;
+
     template <typename ... Args>
     static void getInput(const std::string& prompt, Args*... args) {
         isError = false;
