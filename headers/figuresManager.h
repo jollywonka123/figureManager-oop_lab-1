@@ -2,9 +2,13 @@
 #define FIGURESMANAGER_H
 
 #include <vector>
-
+#include <memory>
 #include "figures.h"
 #include "fabric.h"
+#include <map>
+#include <utility>
+#include <string>
+#include <functional>
 
 enum figTypes {
     CIRCLE = 1,
@@ -12,9 +16,15 @@ enum figTypes {
     TRIANGLE
 };
 
-class figuresManager {
-    public:
-    figuresManager(): cFabric(), rFabric(), tFabric() {};
+using namespace std;
+
+class FiguresManager {
+public:
+    FiguresManager();
+    using func = function<void()>;
+    using methodPair = pair<string, func>;
+    map<int, methodPair> actionMap;
+private:
     void addCircle();
     void addRectangle();
     void addTriangle();
@@ -25,11 +35,9 @@ class figuresManager {
     void deleteFigureByNumber();
     void deleteFiguresByPerimeter();
     void addFigure();
-    private:
-    std::vector<std::shared_ptr<Figure>> figures;
-    CircleFabric cFabric;
-    RectangleFabric rFabric;
-    TriangleFabric tFabric;
+    vector<shared_ptr<Figure>> figures;
+    unique_ptr<FabricsFactory> fabricFactory;
+    map<int, methodPair> figureCreationMap;
 };
 
 
