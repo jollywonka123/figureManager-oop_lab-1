@@ -7,7 +7,8 @@ Circle::Circle(std::string str, double x, double y, double rad):
     Figure(std::move(str)), centerCoordinate{x, y} {
     if (rad <= 0)
         throw std::invalid_argument("Radius must be positive");
-    else this->radius = rad;
+
+    this->radius = rad;
 }
 
 double Circle::getPerimeter() const {
