@@ -13,4 +13,9 @@ enum Option {
     DELETE_LARGER_PERIM,
 };
 
+typedef struct {
+    double x;
+    double y;
+} Dot;
+
 #endif //CONSTANTS_H
