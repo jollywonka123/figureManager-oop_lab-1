@@ -2,12 +2,12 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <utility>
 
-Circle::Circle(std::string str, double x, double y, double rad):
-    Figure(std::move(str)), centerCoordinate{x, y} {
+Circle::Circle(std::string str, const Dot& centreCoord, double rad):
+    Figure(std::move(str)), centre(centreCoord) {
     if (rad <= 0)
         throw std::invalid_argument("Radius must be positive");
-
     this->radius = rad;
 }
 
@@ -16,7 +16,7 @@ double Circle::getPerimeter() const {
 }
 
 void Circle::printFigure() const {
-    std::cout << "Circle: " << this->name << " | centre coordinate: " << this->centerCoordinate[0] << ", " << this->centerCoordinate[1] << " | radius: " << this->radius <<std::endl;
+    std::cout << "Circle: " << this->name << " | centre coordinate: " << this->centre.x << ", " << this->centre.y << " | radius: " << this->radius <<std::endl;
 }
 
 void Circle::printFigurePerimeter() const {
@@ -24,49 +24,47 @@ void Circle::printFigurePerimeter() const {
 }
 
 
-Rectangle::Rectangle(std::string str, double xLeft, double yUpper, double xRight, double yLower):
+Rectangle::Rectangle(std::string str, const Dot& uLeft, const Dot& lRight):
     Figure(std::move(str)) {
-    if ((xRight < xLeft) && (yUpper < yLower)) {
+    if ((uLeft.x > lRight.x) && (uLeft.y < lRight.y)) {
         throw std::invalid_argument("Invalid coordinates");
     }
-    else {
-        upperLeftCoordinate = {xLeft, yUpper};
-        lowerRightCoordinate = {xRight, yLower};
-    }
+    upperLeftCoordinate = uLeft;
+    lowerRightCoordinate = lRight;
 }
 
 double Rectangle::getPerimeter() const {
-    return 2 * ((upperLeftCoordinate[1] - lowerRightCoordinate[1])+(lowerRightCoordinate[0] - upperLeftCoordinate[0]));
+    return 2 * ((upperLeftCoordinate.y - lowerRightCoordinate.y)+(lowerRightCoordinate.x - upperLeftCoordinate.x));
 }
 
 void Rectangle::printFigure() const {
-    std::cout << "Rectangle: " << this->name << " | Upper Left coordinate: " << this->upperLeftCoordinate[0] << ", " << this->upperLeftCoordinate[1] << " | Lower Right coordinate: " << this->lowerRightCoordinate[0] << ", " << this->lowerRightCoordinate[1] <<std::endl;
+    std::cout << "Rectangle: " << this->name << " | Upper Left coordinate: " << this->upperLeftCoordinate.x << ", " << this->upperLeftCoordinate.y << " | Lower Right coordinate: " << this->lowerRightCoordinate.x << ", " << this->lowerRightCoordinate.y <<std::endl;
 }
 
 void Rectangle::printFigurePerimeter() const {
     std::cout << std::fixed << std::setprecision(3) << "Rectangle perimeter: " << this->getPerimeter() << std::endl;
 }
 
-Triangle::Triangle(std::string str, double x1, double y1, double x2, double y2, double x3, double y3):
+Triangle::Triangle(std::string str, const Dot& c1, const Dot& c2, const Dot& c3):
     Figure(std::move(str)) {
-    if ((fabs(x1-x2) < EPS && fabs(y1-y2) < EPS)||(fabs(x2-x3) < EPS && fabs(y2-y3) < EPS)||(fabs(x1-x3) < EPS && fabs(y1-y3) < EPS))
+    if ((fabs(c1.x - c2.x) < EPS && fabs(c1.y - c2.y) < EPS)||(fabs(c2.x - c3.x) < EPS && fabs(c2.y - c3.y) < EPS)||(fabs(c1.x - c3.x) < EPS && fabs(c1.y - c3.y) < EPS))
         throw std::invalid_argument("Invalid coordinates");
     else {
-        coordinate1 = {x1, y1};
-        coordinate2 = {x2, y2};
-        coordinate3 = {x3, y3};
+        coordinate1 = c1;
+        coordinate2 = c2;
+        coordinate3 = c3;
     }
 }
 
 double Triangle::getPerimeter() const {
-    double length1 = sqrt(pow(coordinate2[0] - coordinate1[0], 2) + pow(coordinate2[1] - coordinate1[1], 2));
-    double length2 = sqrt(pow(coordinate3[0] - coordinate2[0], 2) + pow(coordinate3[1] - coordinate2[1], 2));
-    double length3 = sqrt(pow(coordinate3[0] - coordinate1[0], 2) + pow(coordinate3[1] - coordinate1[1], 2));
+    double length1 = sqrt(pow(coordinate2.x - coordinate1.x, 2) + pow(coordinate2.y - coordinate1.y, 2));
+    double length2 = sqrt(pow(coordinate3.x - coordinate2.x, 2) + pow(coordinate3.y - coordinate2.y, 2));
+    double length3 = sqrt(pow(coordinate3.x - coordinate1.x, 2) + pow(coordinate3.y - coordinate1.y, 2));
     return length1 + length2 + length3;
 }
 
 void Triangle::printFigure() const {
-    std::cout << "Triangle: " << this->name << " | Coordinates of vertexes: " << this->coordinate1[0] << ", " << this->coordinate1[1] << "; " << this->coordinate2[0] << ", " << this->coordinate2[1] << "; " << this->coordinate3[0] << ", " << this->coordinate3[1] <<std::endl;
+    std::cout << "Triangle: " << this->name << " | Coordinates of vertexes: " << this->coordinate1.x << ", " << this->coordinate1.y << "; " << this->coordinate2.x << ", " << this->coordinate2.y << "; " << this->coordinate3.x << ", " << this->coordinate3.y <<std::endl;
 }
 
 void Triangle::printFigurePerimeter() const {
