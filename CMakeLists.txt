@@ -17,4 +17,7 @@ add_executable(lab_1 main.cpp
         headers/inputValidator.h
         src/figuresManager.cpp
         headers/figuresManager.h
-        headers/constants.h)
+        headers/constants.h
+        headers/dot.h
+        src/dot.cpp
+)
