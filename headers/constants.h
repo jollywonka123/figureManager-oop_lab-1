@@ -13,9 +13,10 @@ enum Option {
     DELETE_LARGER_PERIM,
 };
 
-typedef struct {
+class Dot {
+public:
     double x;
     double y;
-} Dot;
+};
 
 #endif //CONSTANTS_H
