@@ -2,48 +2,49 @@
 #include "../headers/inputValidator.h"
 #include "string"
 #include "../headers/constants.h"
+#include "../headers/dot.h"
 
 std::shared_ptr<Figure> CircleFabric::createFigure() {
     double rad;
-    Dot centre;
     std::shared_ptr<Figure> figure = nullptr;
     std::string creationName;
-    std::string prompt = "Enter data for circle to create object - (Name X Y Radius): ";
-    InputValidator::getInput<std::string, double, double, double>(prompt, &creationName, &centre.x, &centre.y, &rad);
+    std::string prompt = "Enter data for circle to create object - (Name Radius): ";
+    InputValidator::getInput<std::string, double>(prompt, &creationName, &rad);
     if (InputValidator::isError == false)
         try {
+            Dot centre("centre coordinate");
             figure = std::make_shared<Circle>(creationName, centre, rad);
-        } catch (std::invalid_argument& e) {
+        } catch (std::exception& e) {
             std::cout << "Error: " << e.what() << std::endl;
         }
     return figure;
 }
 
 std::shared_ptr<Figure> RectangleFabric::createFigure() {
-    Dot uLeft, lRight;
     std::string creationName;
     std::shared_ptr<Figure> figure = nullptr;
-    std::string prompt = "Enter data for rectangle to create object - (Name LeftX UpperY RightX LowerY): ";
-    InputValidator::getInput<std::string, double, double, double, double>(prompt, &creationName, &uLeft.x, &uLeft.y, &lRight.x, &lRight.y);
+    std::string prompt = "Enter data for rectangle to create object - (Name): ";
+    InputValidator::getInput<std::string>(prompt, &creationName);
     if (InputValidator::isError == false)
         try {
+            Dot uLeft("upper left coordinate"), lRight("lower right coordinate");
             figure = std::make_shared<Rectangle>(creationName, uLeft, lRight);
-        } catch (std::invalid_argument& e) {
+        } catch (std::exception& e) {
             std::cout << "Error: " << e.what() << std::endl;
         }
     return figure;
 }
 
 std::shared_ptr<Figure> TriangleFabric::createFigure() {
-    Dot c1, c2, c3;
     std::string creationName;
     std::shared_ptr<Figure> figure = nullptr;
-    std::string prompt = "Enter data for triangle to create object - (Name 3XY for each coord., split by space): ";
-    InputValidator::getInput<std::string, double, double, double, double, double, double>(prompt, &creationName, &c1.x, &c1.y, &c2.x, &c2.y, &c3.x, &c3.y);
+    std::string prompt = "Enter data for triangle to create object - (Name): ";
+    InputValidator::getInput<std::string>(prompt, &creationName);
     if (InputValidator::isError == false)
         try {
+            Dot c1("first coordinate"), c2("second coordinate"), c3("third coordinate");
             figure = std::make_shared<Triangle>(creationName, c1, c2, c3);
-        } catch (std::invalid_argument& e) {
+        } catch (std::exception& e) {
             std::cout << "Error: " << e.what() << std::endl;
         }
     return figure;
