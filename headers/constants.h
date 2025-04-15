@@ -13,10 +13,4 @@ enum Option {
     DELETE_LARGER_PERIM,
 };
 
-class Dot {
-public:
-    double x;
-    double y;
-};
-
 #endif //CONSTANTS_H
