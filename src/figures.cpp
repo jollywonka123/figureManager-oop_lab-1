@@ -49,14 +49,10 @@ Triangle::Triangle(std::string str, const Dot& c1, const Dot& c2, const Dot& c3)
         throw std::invalid_argument("Invalid coordinates");
 }
 
-double Triangle::calculateLength(const Dot &coord1, const Dot &coord2) {
-    return sqrt(pow(coord1.getX() - coord2.getX(), 2) + pow(coord1.getY() - coord2.getY(), 2));
-}
-
 double Triangle::getPerimeter() const {
-    double length1 = calculateLength(coordinate1, coordinate2);
-    double length2 = calculateLength(coordinate2, coordinate3);
-    double length3 = calculateLength(coordinate3, coordinate1);
+    double length1 = Dot::calculateLength(coordinate1, coordinate2);
+    double length2 = Dot::calculateLength(coordinate2, coordinate3);
+    double length3 = Dot::calculateLength(coordinate3, coordinate1);
     return length1 + length2 + length3;
 }
 
