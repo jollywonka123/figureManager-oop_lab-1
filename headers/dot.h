@@ -12,6 +12,7 @@ public:
     void setY(const std::string& name = "");
     double getX() const;
     double getY() const;
+    static double calculateLength(const Dot& d1, const Dot& d2);
 };
 
 #endif //DOT_H
