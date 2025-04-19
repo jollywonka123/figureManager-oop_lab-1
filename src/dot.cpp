@@ -1,5 +1,6 @@
 #include "../headers/dot.h"
 #include "../headers/inputValidator.h"
+#include <cmath>
 
 void Dot::setX(const std::string& name) {
     std::string prompt = "Enter x for " + name + ": ";
@@ -30,4 +31,8 @@ double Dot::getX() const {
 
 double Dot::getY() const {
     return y;
+}
+
+double Dot::calculateLength(const Dot &d1, const Dot &d2) {
+    return sqrt(pow(d1.getX() - d2.getX(), 2) + pow(d1.getY() - d2.getY(), 2));
 }
