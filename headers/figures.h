@@ -50,7 +50,6 @@ class Triangle: public Figure {
     void printFigurePerimeter() const override;
     ~Triangle() override = default;
     private:
-    static double calculateLength(const Dot& coord1, const Dot& coord2) ;
     Dot coordinate1{};
     Dot coordinate2{};
     Dot coordinate3{};
